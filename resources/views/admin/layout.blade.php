@@ -10,34 +10,7 @@
     <!-- Fonts and icons -->
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <style>
-        .select2 {
-            width: 100% !important;
-        }
-
-        .select2-container .select2-selection--single {
-            padding: 10px 15px;
-        }
-
-
-        .swal2-actions {
-            display: flex;
-            justify-content: flex-end;
-            /* Align buttons to the right */
-        }
-
-        .swal2-confirm {
-            order: 2;
-            /* Ensure the delete button appears second */
-        }
-
-        .swal2-cancel {
-            order: 1;
-            /* Ensure the cancel button appears first */
-        }
-    </style>
+    
     <script>
         WebFont.load({
             google: {
@@ -63,6 +36,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    
     @yield('link')
 </head>
 
@@ -197,6 +171,8 @@
     <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
     <!-- Kaiadmin JS -->
     <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @include('sweetalert::alert')
     @yield('src')

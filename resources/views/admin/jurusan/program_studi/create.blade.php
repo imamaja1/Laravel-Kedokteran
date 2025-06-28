@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label">Jenjang</label>
-                        <select class="form-control" name="jenjang" required>
+                        <select class="form-control select1" id="create_jenjang" name="jenjang" required>
                             <option value="">-- select --</option>
                             @foreach ($jenjang as $item)
                                 <option value="{{$item->id}}">{{ $item->nama_jenjang }}</option>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label">Kompetensi</label>
-                        <select class="form-control select3" name="kompetensi" required>
+                        <select class="form-control select1" name="kompetensi" required>
                             <option value="">-- select --</option>
                             <option value="N">Tidak</option>
                             <option value="Y">Iya</option>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="nama_prodi" class="form-label">Kaprodi</label>
-                        <select class="form-control" name="kaprodi">
+                        <select class="form-control select1" name="kaprodi">
                             <option value="1">Kosong</option>
                         </select>
                     </div>
@@ -53,3 +53,4 @@
         </div>
     </div>
 </div>
+

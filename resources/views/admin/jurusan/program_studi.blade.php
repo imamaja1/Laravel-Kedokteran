@@ -54,9 +54,13 @@
     @include('admin/jurusan/program_studi/update')
 @endsection
 @section('src')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
     <script>
+        $('.select1').each(function() {
+            $(this).select2({
+                width: '100%',
+                dropdownParent: $(this).closest('.modal'),
+            });
+        });
         function confirmDelete(id) {
             Swal.fire({
                 title: 'Apakah Kamu Yakin ?',

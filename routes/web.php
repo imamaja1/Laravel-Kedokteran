@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Jurusan\FakultasControlelr;
 use App\Http\Controllers\Admin\Jurusan\FakultasController;
+use App\Http\Controllers\Admin\Jurusan\KurikulumController;
 use App\Http\Controllers\Admin\Jurusan\Program_studiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -44,6 +45,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/program_studi/jenjang', [Program_studiController::class, 'jenjang_store'])->name('admin.program_studi.jenjang');
     Route::put('/program_studi/jenjang', [Program_studiController::class, 'jenjang_update'])->name('admin.program_studi.jenjang');
     Route::delete('/program_studi/jenjang/{id}', [Program_studiController::class, 'jenjang_delete'])->name('admin.program_studi.jenjang.delete');
+    // kurikulum
+    Route::get('/kurikulum', [KurikulumController::class, 'index'])->name('admin.kurikulum');
 });
 
 Route::get('/dashboard', function () {

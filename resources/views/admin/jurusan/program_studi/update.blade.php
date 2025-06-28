@@ -20,21 +20,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="nama_prodi" class="form-label">Jenjang</label>
-                        <select name="" id="" class="form-control" name="jenjang" id="jenjang">
+                        <select name="" id="" class="form-control select1" name="jenjang" id="jenjang">
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="nama_prodi" class="form-label">Kompetensi</label>
-                        <select name="" id="" class="form-control" name="kompetensi" id="komeptensi_prodi">
+                        <select name="" id="" class="form-control select1" name="kompetensi" id="komeptensi_prodi">
                             <option value="N">Tidak</option>
                             <option value="Y">Iya</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="nama_prodi" class="form-label">Kaprodi</label>
-                        <select name="" id="" class="form-control" name="kaprodi" id="kaprodi">
+                        <select name="" id="" class="form-control select1" name="kaprodi" id="kaprodi">
                             <option value="1">1</option>
                         </select>
                     </div>

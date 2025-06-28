@@ -15,10 +15,10 @@
         <p>Program Studi</p>
     </a>
 </li>
-<li class="nav-item {{ request()->segment(2) == 'dosen' ? 'active' : '' }}">
-    <a href="{{route('admin.program_studi')}}" class="collapsed" aria-expanded="false">
+<li class="nav-item {{ request()->segment(2) == 'kurikulum' ? 'active' : '' }}">
+    <a href="{{route('admin.kurikulum')}}" class="collapsed" aria-expanded="false">
         <i class="fas fa-home"></i>
-        <p>Dosen</p>
+        <p>Kurikulum</p>
     </a>
 </li>
 
