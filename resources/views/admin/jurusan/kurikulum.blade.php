@@ -7,13 +7,16 @@
     <div class="page-inner">
         @include('admin/componen/title')
         <div class="card card-stats card-round w-100">
-            <div class="card-header">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Recipient’s username"
-                        aria-label="Recipient’s username" aria-describedby="button-addon2">
-                    <button class="btn input-group-text" type="button" id="button-addon2">Search</button>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#create">Tambah</button>
+            <div class="card-header row">
+                <div class="col-md-4 col-8">
+                    <select name="" id="" class="form-control select2" style="width:100%;">
+                        <option>2017/2018</option>
+                    </select>
                 </div>
+                <div class="col-md-8 col-4">
+                    <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#create">Tambah</button>
+                </div>
+                
             </div>
             <div class="card-body">
 
@@ -28,6 +31,9 @@
                 width: '100%',
                 dropdownParent: $(this).closest('.modal'),
             });
+        });
+        $('.select2').select2({
+            width: 'resolve',
         });
 
         function confirmDelete(id) {

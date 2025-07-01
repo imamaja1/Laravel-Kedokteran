@@ -7,7 +7,7 @@
     <div class="collapse" id="submenu1" style="">
         <ul class="nav nav-collapse">
             <li>
-                <a href="{{route('admin.status-perkuliahan')}}">
+                <a href="">
                     <span class="sub-item">Status Perkuliahan</span>
                 </a>
             </li>

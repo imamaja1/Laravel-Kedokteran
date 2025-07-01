@@ -26,9 +26,9 @@ class Program_studiController extends Controller
             'kompetensi' => $request->kompetensi,
             'kaprodi' => $request->kaprodi,
         );
-        ProgramStudi::create($obj);
+        
         try {
-            
+            ProgramStudi::create($obj);
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
         
         } catch (\Throwable $th) {

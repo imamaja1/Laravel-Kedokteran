@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class KurikulumController extends Controller
 {
     public function index(){
-        $data['title'] = 'Kurikulum';
+        $data['title'] = 'Data Kurikulum';
         $data['data'] = Kurikulum::all();
         return view('admin/jurusan/kurikulum', $data);
     }

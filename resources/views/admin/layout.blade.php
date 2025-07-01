@@ -36,7 +36,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
-    
+    <style>
+        .nav-active{
+            background-color: #00000029
+        }
+    </style>
     @yield('link')
 </head>
 
@@ -57,9 +61,9 @@
                             <i class="gg-menu-left"></i>
                         </button>
                     </div>
-                    <button class="topbar-toggler more">
+                    {{-- <button class="topbar-toggler more">
                         <i class="gg-more-vertical-alt"></i>
-                    </button>
+                    </button> --}}
                 </div>
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
