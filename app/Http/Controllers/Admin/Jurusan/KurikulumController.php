@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Jurusan;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataKurikulum;
 use App\Models\Kurikulum;
 use App\Models\TahunAkademik;
 use Illuminate\Http\Request;
@@ -13,7 +14,13 @@ class KurikulumController extends Controller
     public function index(){
         $data['title'] = 'Data Kurikulum';
         $data['kurikulum'] = Kurikulum::all();
-        $data['data'] = Kurikulum::all();
+        for ($i=1; $i <= 8 ; $i++) { 
+            $obj[] = array(
+                'semester' => $i,
+                'data' => DataKurikulum::with('data_matakuliah')->where('semester',$i)->get()
+            );
+        }
+        $data['data'] = $obj;
         return view('admin/jurusan/kurikulum', $data);
     }
 

@@ -16,14 +16,17 @@
                     </select>
                 </div>
                 <div class="col-md-8 col-4">
-                    <a href="{{ route('admin.kurikulum.kedokteran') }}" class="btn btn-primary mt-2 btn-sm float-end">Kurikulum Angkatan</a>
+                    <a href="{{ route('admin.kurikulum.kedokteran') }}"
+                        class="btn btn-primary mt-2 btn-sm float-end">Kurikulum Angkatan</a>
                 </div>
             </div>
-            <div class="card-body">
-                @for ($i = 1; $i < 9; $i++)
+        </div>
+        @foreach ($data as $key => $item)
+            <div class="card card-round w-100">
+                <div class="card-body">
                     <div class="mb-1">
-                        <h2>
-                            Semester {{ $i }}
+                        <h4>
+                            Semester {{ $item['semester'] }}
                             <button class="btn btn-sm btn-primary float-end " data-bs-toggle="modal"
                                 data-bs-target="#create">Tambah</button>
                             <h2>
@@ -40,23 +43,53 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $teori[$key] = 0;
+                                $praktik[$key] = 0;
+                            @endphp
+                            @foreach ($item['data'] as $item2)
+                                <tr>
+                                    <td>{{ $item2->data_matakuliah->kode_matakuliah }}</td>
+                                    <td>{{ $item2->data_matakuliah->nama_matakuliah }}</td>
+                                    <td>{{ $item2->data_matakuliah->sks_teori }}</td>
+                                    <td>{{ $item2->data_matakuliah->sks_praktik }}</td>
+                                    <td>{{ $item2->data_matakuliah->sks_teori + $item2->data_matakuliah->sks_praktik }}</td>
+                                    <td><button class="btn btn-sm btn-danger">Delete</button></td>
+                                    @php
+                                        $teori[$key] = $teori[$key] + $item2->data_matakuliah->sks_teori;
+                                        $praktik[$key] = $praktik[$key] + $item2->data_matakuliah->sks_praktik;
+                                    @endphp
+                                </tr>
+                            @endforeach
                             <tr>
-                                <td>Mark</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td>total SKS</td>
-                                <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <th colspan="2" class="text-end">Jumlah</th>
-                                <th>Mark</th>
-                                <th>Otto</th>
-                                <th colspan="2">TOTAL SEMUA</th>
+                                <th colspan="2" class="text-center">Jumlah</th>
+                                <th>{{ $teori[$key] }}</th>
+                                <th>{{ $praktik[$key] }}</th>
+                                <th colspan="2">{{ $teori[$key] + $praktik[$key] }}</th>
                             </tr>
                         </tbody>
                     </table>
-                @endfor
+                </div>
+            </div>
+        @endforeach
+        <div class="card card-stats card-round col-md-4">
+            <div class="card-body">
+                <table class="table">
+                    <thead >
+                        <tr>
+                            <td scope="col"  >Total SKS Teori</td>
+                            <td scope="col">{{ array_sum($teori) }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" >Total SKS Praktik</td>
+                            <td scope="col" >{{ array_sum($praktik) }}</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td scope="col" >Total SKS</td>
+                            <td scope="col" >{{ array_sum($teori) + array_sum($praktik) }}</td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
