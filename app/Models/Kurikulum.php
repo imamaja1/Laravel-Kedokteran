@@ -18,4 +18,12 @@ class Kurikulum extends Model
             'id_matakuliah',
         );
     }
+     public function tahun_akademik(): HasOne
+    {
+        return $this->HasOne(
+            TahunAkademik::class,
+            'id',
+            'id_tahun_akademik',
+        );
+    }
 }

@@ -4,13 +4,61 @@ namespace App\Http\Controllers\Admin\Jurusan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kurikulum;
+use App\Models\TahunAkademik;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KurikulumController extends Controller
 {
     public function index(){
         $data['title'] = 'Data Kurikulum';
+        $data['kurikulum'] = Kurikulum::all();
         $data['data'] = Kurikulum::all();
         return view('admin/jurusan/kurikulum', $data);
+    }
+
+    public function kurkulum_kedokteran(){
+        $data['title'] = 'Data Kurikulum Kedokteran';
+        $data['kurikulum'] = Kurikulum::with('tahun_akademik')->get();
+        $data['tahun_akademik'] = TahunAkademik::where('semester',1)->get();
+        return view('admin/jurusan/kurikulum/data_kurikulum', $data);
+    }
+    public function kurkulum_kedokteran_store(Request $request){
+        $obj = array(
+            'nama_kurikulum' => $request->nama_kurikulum,
+            'id_tahun_akademik' => $request->tahun_akademik,
+        );
+        try {
+            Kurikulum::create($obj);
+            Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
+        
+        } catch (\Throwable $th) {
+            Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
+        }
+        return redirect()->back();
+    }
+    public function kurkulum_kedokteran_update(Request $request){
+        $obj = array(
+            'nama_kurikulum' => $request->nama_kurikulum,
+            'id_tahun_akademik' => $request->tahun_akademik,
+        );
+        try {
+            Kurikulum::where('id',$request->id)->update($obj);
+            Alert::success('Update Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
+        
+        } catch (\Throwable $th) {
+            Alert::error('Update Data Error', 'Server Error!')->autoClose(2000);
+        }
+        return redirect()->back();
+    }
+    public function kurkulum_kedokteran_delete($id){
+        try {
+            Kurikulum::where('id',$id)->delete();
+            Alert::success('Update Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
+        
+        } catch (\Throwable $th) {
+            Alert::error('Update Data Error', 'Server Error!')->autoClose(2000);
+        }
+        return redirect()->back();
     }
 }

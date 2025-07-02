@@ -22,7 +22,6 @@ class MatakuliahController extends Controller
             'sks_praktik' => $request->sks_praktik,
             'sks_praktikum' => $request->sks_praktikum
         );
-        
         try {
             Matakuliah::create($obj);
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);

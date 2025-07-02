@@ -48,10 +48,17 @@ Route::prefix('admin')->group(function () {
     Route::delete('/program_studi/jenjang/{id}', [Program_studiController::class, 'jenjang_delete'])->name('admin.program_studi.jenjang.delete');
     // kurikulum
     Route::get('/kurikulum/data_kurikulum', [KurikulumController::class, 'index'])->name('admin.kurikulum');
+
+    Route::get('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran'])->name('admin.kurikulum.kedokteran');
+    Route::post('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran_store'])->name('admin.kurikulum.kedokteran');
+    Route::put('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran_update'])->name('admin.kurikulum.kedokteran');
+    Route::delete('/kurikulum/data_kurikulum/kurikulum_kedokteran/{id}', [KurikulumController::class, 'kurkulum_kedokteran_delete'])->name('admin.kurikulum.kedokteran.delete');
+
     Route::get('/kurikulum/matakuliah', [MatakuliahController::class, 'index'])->name('admin.matakuliah');
     Route::post('/kurikulum/matakuliah', [MatakuliahController::class, 'store'])->name('admin.matakuliah');
     Route::put('/kurikulum/matakuliah', [MatakuliahController::class, 'update'])->name('admin.matakuliah');
     Route::delete('/kurikulum/matakuliah/{id}', [MatakuliahController::class, 'delete'])->name('admin.matakuliah.delete');
+    
 });
 
 Route::get('/dashboard', function () {
