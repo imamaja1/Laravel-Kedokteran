@@ -89,7 +89,6 @@
                     <thead>
                         <tr>
                             <td scope="col">Total SKS Teori</td>
-                           
                             <td scope="col">{{ array_sum($teori) }}</td>
                         </tr>
                         <tr>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Jurusan;
 use App\Http\Controllers\Controller;
 use App\Models\DataKurikulum;
 use App\Models\Kurikulum;
+use App\Models\Matakuliah;
 use App\Models\TahunAkademik;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,6 +23,7 @@ class KurikulumController extends Controller
         }
         $data['id_kurikulum'] = Kurikulum::get()->first();
         $data['data'] = $obj;
+        $data['matakuliah'] = Matakuliah::all();
         return view('admin/jurusan/kurikulum', $data);
     }
     public function store(Request $request){

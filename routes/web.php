@@ -50,18 +50,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/kurikulum/data_kurikulum', [KurikulumController::class, 'index'])->name('admin.kurikulum');
     Route::post('/kurikulum/data_kurikulum', [KurikulumController::class, 'store'])->name('admin.kurikulum');
     Route::delete('/kurikulum/data_kurikulum/{id}', [KurikulumController::class, 'delete'])->name('admin.kurikulum.delete');
-
-
     Route::get('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran'])->name('admin.kurikulum.kedokteran');
     Route::post('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran_store'])->name('admin.kurikulum.kedokteran');
     Route::put('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran_update'])->name('admin.kurikulum.kedokteran');
     Route::delete('/kurikulum/data_kurikulum/kurikulum_kedokteran/{id}', [KurikulumController::class, 'kurkulum_kedokteran_delete'])->name('admin.kurikulum.kedokteran.delete');
-
     Route::get('/kurikulum/matakuliah', [MatakuliahController::class, 'index'])->name('admin.matakuliah');
     Route::post('/kurikulum/matakuliah', [MatakuliahController::class, 'store'])->name('admin.matakuliah');
     Route::put('/kurikulum/matakuliah', [MatakuliahController::class, 'update'])->name('admin.matakuliah');
     Route::delete('/kurikulum/matakuliah/{id}', [MatakuliahController::class, 'delete'])->name('admin.matakuliah.delete');
-    
+    //dosen
+    Route::get('/dosen', [KurikulumController::class, 'index'])->name('admin.dosen');
 });
 
 Route::get('/dashboard', function () {

@@ -1,3 +1,38 @@
+/* Ukuran keseluruhan */
+.select2-container--default .select2-selection--multiple {
+  background-color: #f8f9fa;
+  border: 2px solid #007bff;
+  border-radius: 0.375rem;
+  min-height: 38px;
+  padding: 4px;
+}
+
+/* Tag di dalam select2 multiple */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0 8px;
+  margin-top: 4px;
+}
+
+/* Hover efek pada tag */
+.select2-container--default .select2-selection--multiple .select2-selection__choice:hover {
+  background-color: #0056b3;
+}
+
+/* Placeholder text */
+.select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field {
+  color: #6c757d;
+}
+
+/* Dropdown hasil pencarian */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #007bff;
+  color: white;
+}
+
 /* Gaya utama Select2 agar menyerupai form-control Bootstrap 5 */
 .select2-container--default .select2-selection--single {
   height: calc(2.375rem + 2px);
