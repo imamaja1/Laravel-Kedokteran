@@ -11,13 +11,14 @@
                 <div class="modal-body row p-3">
                     <div class="mb-3">
                         <label for="" class="form-label">Nama Kurikulum</label>
-                        <input type="text" class="form-control" name="nama_kurikulum" placeholder="Nama Kurikulum" required>
+                        <input type="text" class="form-control" name="nama_kurikulum" placeholder="Nama Kurikulum"
+                            required>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Tahun Akdemik</label>
                         <select class="form-control select1" name="tahun_akademik" required>
                             @foreach ($tahun_akademik as $item)
-                                <option value="{{$item->tahun_akademik}}">{{$item->tahun_akademik}}</option>
+                                <option value="{{$item->id}}">{{$item->tahun_akademik}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -30,4 +31,3 @@
         </div>
     </div>
 </div>
-

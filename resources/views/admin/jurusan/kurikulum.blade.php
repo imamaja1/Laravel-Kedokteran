@@ -27,8 +27,11 @@
                     <div class="mb-1">
                         <h4>
                             Semester {{ $item['semester'] }}
-                            <button class="btn btn-sm btn-primary float-end " data-bs-toggle="modal"
-                                data-bs-target="#create" onclick="create({{$id_kurikulum->id_tahun_akademik}},{{ $item['semester'] }})">Tambah</button>
+                            @if ($id_kurikulum)
+                                <button class="btn btn-sm btn-primary float-end " data-bs-toggle="modal" data-bs-target="#create"
+                                    onclick="create({{$id_kurikulum->id_tahun_akademik}},{{ $item['semester'] }})">Tambah</button>
+                            @endif
+
                             <h2>
                     </div>
                     @php
@@ -57,10 +60,12 @@
                                         <td>{{ $item2->data_matakuliah->sks_teori + $item2->data_matakuliah->sks_praktik }}
                                         </td>
                                         <td>
-                                            <form id="delete-form-{{$number}}" action="{{route('admin.kurikulum.delete',$item2->id)}}" method="post">
+                                            <form id="delete-form-{{$number}}" action="{{route('admin.kurikulum.delete', $item2->id)}}"
+                                                method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete({{$number}})">Delete</button>
+                                                <button type="button" class="btn btn-sm btn-danger"
+                                                    onclick="confirmDelete({{$number}})">Delete</button>
                                             </form>
                                         </td>
                                         @php
@@ -78,31 +83,35 @@
                             </tbody>
                         </table>
                     @else
-                    <span >Data SKS tidak ada</span>
+                        <span>Data SKS tidak ada</span>
                     @endif
                 </div>
             </div>
         @endforeach
-        <div class="card card-stats card-round col-md-4">
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td scope="col">Total SKS Teori</td>
-                            <td scope="col">{{ array_sum($teori) }}</td>
-                        </tr>
-                        <tr>
-                            <td scope="col">Total SKS Praktik</td>
-                            <td scope="col">{{ array_sum($praktik) }}</td>
-                        </tr>
-                        <tr class="table-secondary">
-                            <td scope="col">Total SKS</td>
-                            <td scope="col">
-                                {{ array_sum($teori) + array_sum($praktik) }}
-                            </td>
-                        </tr>
-                    </thead>
-                </table>
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class=" card card-stats card-round col-md-4">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td scope="col">Total SKS Teori</td>
+                                    <td scope="col">{{ array_sum($teori) }}</td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">Total SKS Praktik</td>
+                                    <td scope="col">{{ array_sum($praktik) }}</td>
+                                </tr>
+                                <tr class="table-secondary">
+                                    <td scope="col">Total SKS</td>
+                                    <td scope="col">
+                                        {{ array_sum($teori) + array_sum($praktik) }}
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -110,7 +119,7 @@
 @endsection
 @section('src')
     <script>
-        $('.select1').each(function() {
+        $('.select1').each(function () {
             $(this).select2({
                 width: '100%',
                 dropdownParent: $(this).closest('.modal'),

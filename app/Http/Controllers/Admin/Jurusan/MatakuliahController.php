@@ -9,12 +9,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class MatakuliahController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data['title'] = 'Matakuliah';
         $data['data'] = Matakuliah::all();
         return view('admin/jurusan/matakuliah', $data);
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $obj = array(
             'kode_matakuliah' => $request->kode_matakuliah,
             'nama_matakuliah' => $request->nama_matakuliah,
@@ -25,13 +27,14 @@ class MatakuliahController extends Controller
         try {
             Matakuliah::create($obj);
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $obj = array(
             'kode_matakuliah' => $request->kode_matakuliah,
             'nama_matakuliah' => $request->nama_matakuliah,
@@ -40,19 +43,20 @@ class MatakuliahController extends Controller
             'sks_praktikum' => $request->sks_praktikum
         );
         try {
-            Matakuliah::where('id',$request->id)->update($obj);
+            Matakuliah::where('id', $request->id)->update($obj);
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
-    public function delete($id){
+    public function delete($id)
+    {
         try {
-            Matakuliah::where('id',$id)->delete();
+            Matakuliah::where('id', $id)->delete();
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
         }
