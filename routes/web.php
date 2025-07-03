@@ -48,6 +48,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('/program_studi/jenjang/{id}', [Program_studiController::class, 'jenjang_delete'])->name('admin.program_studi.jenjang.delete');
     // kurikulum
     Route::get('/kurikulum/data_kurikulum', [KurikulumController::class, 'index'])->name('admin.kurikulum');
+    Route::post('/kurikulum/data_kurikulum', [KurikulumController::class, 'store'])->name('admin.kurikulum');
+    Route::delete('/kurikulum/data_kurikulum/{id}', [KurikulumController::class, 'delete'])->name('admin.kurikulum.delete');
+
 
     Route::get('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran'])->name('admin.kurikulum.kedokteran');
     Route::post('/kurikulum/data_kurikulum/kurikulum_kedokteran', [KurikulumController::class, 'kurkulum_kedokteran_store'])->name('admin.kurikulum.kedokteran');

@@ -28,71 +28,86 @@
                         <h4>
                             Semester {{ $item['semester'] }}
                             <button class="btn btn-sm btn-primary float-end " data-bs-toggle="modal"
-                                data-bs-target="#create">Tambah</button>
+                                data-bs-target="#create" onclick="create({{$id_kurikulum->id_tahun_akademik}},{{ $item['semester'] }})">Tambah</button>
                             <h2>
                     </div>
-                    <table class="table">
-                        <thead class="table-secondary">
-                            <tr>
-                                <th scope="col">Kode Matakulaih</th>
-                                <th scope="col">Nama Matakulaih</th>
-                                <th scope="col">SKS Teori</th>
-                                <th scope="col">SKS Praktik</th>
-                                <th scope="col">Total SKS</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $teori[$key] = 0;
-                                $praktik[$key] = 0;
-                            @endphp
-                            @foreach ($item['data'] as $item2)
+                    @php
+                        $teori[$key] = 0;
+                        $praktik[$key] = 0;
+                    @endphp
+                    @if (count($item['data']) > 0)
+                        <table class="table">
+                            <thead class="table-secondary">
                                 <tr>
-                                    <td>{{ $item2->data_matakuliah->kode_matakuliah }}</td>
-                                    <td>{{ $item2->data_matakuliah->nama_matakuliah }}</td>
-                                    <td>{{ $item2->data_matakuliah->sks_teori }}</td>
-                                    <td>{{ $item2->data_matakuliah->sks_praktik }}</td>
-                                    <td>{{ $item2->data_matakuliah->sks_teori + $item2->data_matakuliah->sks_praktik }}</td>
-                                    <td><button class="btn btn-sm btn-danger">Delete</button></td>
-                                    @php
-                                        $teori[$key] = $teori[$key] + $item2->data_matakuliah->sks_teori;
-                                        $praktik[$key] = $praktik[$key] + $item2->data_matakuliah->sks_praktik;
-                                    @endphp
+                                    <th scope="col">Kode Matakulaih</th>
+                                    <th scope="col">Nama Matakulaih</th>
+                                    <th scope="col">SKS Teori</th>
+                                    <th scope="col">SKS Praktik</th>
+                                    <th scope="col">Total SKS</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            @endforeach
-                            <tr>
-                                <th colspan="2" class="text-center">Jumlah</th>
-                                <th>{{ $teori[$key] }}</th>
-                                <th>{{ $praktik[$key] }}</th>
-                                <th colspan="2">{{ $teori[$key] + $praktik[$key] }}</th>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($item['data'] as $number => $item2)
+                                    <tr>
+                                        <td>{{ $item2->data_matakuliah->kode_matakuliah }}</td>
+                                        <td>{{ $item2->data_matakuliah->nama_matakuliah }}</td>
+                                        <td>{{ $item2->data_matakuliah->sks_teori }}</td>
+                                        <td>{{ $item2->data_matakuliah->sks_praktik }}</td>
+                                        <td>{{ $item2->data_matakuliah->sks_teori + $item2->data_matakuliah->sks_praktik }}
+                                        </td>
+                                        <td>
+                                            <form id="delete-form-{{$number}}" action="{{route('admin.kurikulum.delete',$item2->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete({{$number}})">Delete</button>
+                                            </form>
+                                        </td>
+                                        @php
+                                            $teori[$key] = $teori[$key] + $item2->data_matakuliah->sks_teori;
+                                            $praktik[$key] = $praktik[$key] + $item2->data_matakuliah->sks_praktik;
+                                        @endphp
+                                    </tr>
+                                @endforeach
+                                <tr>
+                                    <th colspan="2" class="text-center">Jumlah</th>
+                                    <th>{{ $teori[$key] }}</th>
+                                    <th>{{ $praktik[$key] }}</th>
+                                    <th colspan="2">{{ $teori[$key] + $praktik[$key] }}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @else
+                    <span >Data SKS tidak ada</span>
+                    @endif
                 </div>
             </div>
         @endforeach
         <div class="card card-stats card-round col-md-4">
             <div class="card-body">
                 <table class="table">
-                    <thead >
+                    <thead>
                         <tr>
-                            <td scope="col"  >Total SKS Teori</td>
+                            <td scope="col">Total SKS Teori</td>
+                           
                             <td scope="col">{{ array_sum($teori) }}</td>
                         </tr>
                         <tr>
-                            <td scope="col" >Total SKS Praktik</td>
-                            <td scope="col" >{{ array_sum($praktik) }}</td>
+                            <td scope="col">Total SKS Praktik</td>
+                            <td scope="col">{{ array_sum($praktik) }}</td>
                         </tr>
                         <tr class="table-secondary">
-                            <td scope="col" >Total SKS</td>
-                            <td scope="col" >{{ array_sum($teori) + array_sum($praktik) }}</td>
+                            <td scope="col">Total SKS</td>
+                            <td scope="col">
+                                {{ array_sum($teori) + array_sum($praktik) }}
+                            </td>
                         </tr>
                     </thead>
                 </table>
             </div>
         </div>
     </div>
+    @include('admin/jurusan/kurikulum/create')
 @endsection
 @section('src')
     <script>
@@ -101,9 +116,6 @@
                 width: '100%',
                 dropdownParent: $(this).closest('.modal'),
             });
-        });
-        $('.select2').select2({
-            width: 'resolve',
         });
 
         function confirmDelete(id) {

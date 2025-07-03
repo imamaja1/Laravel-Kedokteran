@@ -17,6 +17,6 @@ class DataKurikulum extends Model
      */
     public function data_matakuliah(): HasOne
     {
-        return $this->hasOne(Matakuliah::class, 'id', 'id_kurikulum');
+        return $this->hasOne(Matakuliah::class, 'id', 'id_matakuliah');
     }
 }

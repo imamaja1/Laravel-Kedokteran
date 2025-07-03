@@ -20,10 +20,35 @@ class KurikulumController extends Controller
                 'data' => DataKurikulum::with('data_matakuliah')->where('semester',$i)->get()
             );
         }
+        $data['id_kurikulum'] = Kurikulum::get()->first();
         $data['data'] = $obj;
         return view('admin/jurusan/kurikulum', $data);
     }
-
+    public function store(Request $request){
+        $obj = array(
+            'semester' => $request->semester,
+            'id_kurikulum' => $request->kurikulum,
+            'id_matakuliah' => $request->matakuliah
+        );
+        try {
+            DataKurikulum::create($obj);
+            Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
+        
+        } catch (\Throwable $th) {
+            Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
+        }
+        return redirect()->back();
+    }
+    public function delete($id){
+        try {
+            DataKurikulum::where('id',$id)->delete();
+            Alert::success('Delete Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
+        
+        } catch (\Throwable $th) {
+            Alert::error('Delete Data Error', 'Server Error!')->autoClose(2000);
+        }
+        return redirect()->back();
+    }
     public function kurkulum_kedokteran(){
         $data['title'] = 'Data Kurikulum Kedokteran';
         $data['kurikulum'] = Kurikulum::with('tahun_akademik')->get();
@@ -61,10 +86,10 @@ class KurikulumController extends Controller
     public function kurkulum_kedokteran_delete($id){
         try {
             Kurikulum::where('id',$id)->delete();
-            Alert::success('Update Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
+            Alert::success('Delete Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
         
         } catch (\Throwable $th) {
-            Alert::error('Update Data Error', 'Server Error!')->autoClose(2000);
+            Alert::error('Delete Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
