@@ -16,8 +16,7 @@
     </a>
 </li>
 <li class="nav-item  {{ request()->segment(2) == 'kurikulum' ? ' submenu' : '' }}">
-    <a data-bs-toggle="collapse" href="#submenu1" 
-        class="{{ request()->segment(2) == 'kurikulum' ? '' : 'collapsed' }}" 
+    <a data-bs-toggle="collapse" href="#submenu1" class="{{ request()->segment(2) == 'kurikulum' ? '' : 'collapsed' }}"
         aria-expanded="{{ request()->segment(2) == 'kurikulum' ? 'true' : 'false' }}">
         <i class="fas fa-bars"></i>
         <p>Kurikulum</p>
@@ -26,7 +25,7 @@
     <div class="{{ request()->segment(2) == 'kurikulum' ? 'collapse show' : 'collapse ' }}" id="submenu1" style="">
         <ul class="nav nav-collapse ">
             <li>
-                <a href="{{route('admin.kurikulum')}}" >
+                <a href="{{route('admin.kurikulum')}}">
                     <span class="sub-item @if (request()->segment(2) == 'kurikulum' && request()->segment(3) == 'data_kurikulum')
                         text-white
                     @endif ">Data Kurikulum</span>
@@ -49,13 +48,13 @@
         </ul>
     </div>
 </li>
-<li class="nav-item {{ request()->segment(2) == 'program_studi' ? 'active' : '' }}">
-    <a href="{{route('admin.program_studi')}}" class="collapsed" aria-expanded="false">
+<li class="nav-item {{ request()->segment(2) == 'dosen' ? 'active' : '' }}">
+    <a href="{{route('admin.dosen')}}" class="collapsed" aria-expanded="false">
         <i class="fas fa-home"></i>
         <p>Dosen</p>
     </a>
 </li>
-<li class="nav-item {{ request()->segment(2) == 'program_studi' ? 'active' : '' }}">
+<li class="nav-item {{ request()->segment(2) == 'perwalian' ? 'active' : '' }}">
     <a href="{{route('admin.program_studi')}}" class="collapsed" aria-expanded="false">
         <i class="fas fa-home"></i>
         <p>Perwalian</p>
