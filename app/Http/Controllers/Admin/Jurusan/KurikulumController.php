@@ -12,21 +12,29 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class KurikulumController extends Controller
 {
-    public function index(){
+    public function index(Request $request)
+    {
         $data['title'] = 'Data Kurikulum';
-        $data['kurikulum'] = Kurikulum::all();
-        for ($i=1; $i <= 8 ; $i++) { 
+        if ($request->query('kurikulum')) {
+            $data['id_kurikulum'] = Kurikulum::where('id', $request->query('kurikulum'))->get()->first();
+        } else {
+            $data['id_kurikulum'] = Kurikulum::get()->first();
+        }
+        // echo json_encode($data['id_kurikulum']);
+        // die();
+        for ($i = 1; $i <= 8; $i++) {
             $obj[] = array(
                 'semester' => $i,
-                'data' => DataKurikulum::with('data_matakuliah')->where('semester',$i)->get()
+                'data' => DataKurikulum::with('data_matakuliah')->where('id_kurikulum', $data['id_kurikulum']->id)->where('semester', $i)->get()
             );
         }
-        $data['id_kurikulum'] = Kurikulum::get()->first();
+        $data['kurikulum'] = Kurikulum::all();
         $data['data'] = $obj;
         $data['matakuliah'] = Matakuliah::all();
         return view('admin/jurusan/kurikulum', $data);
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $obj = array(
             'semester' => $request->semester,
             'id_kurikulum' => $request->kurikulum,
@@ -35,29 +43,32 @@ class KurikulumController extends Controller
         try {
             DataKurikulum::create($obj);
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
-    public function delete($id){
+    public function delete($id)
+    {
         try {
-            DataKurikulum::where('id',$id)->delete();
+            DataKurikulum::where('id', $id)->delete();
             Alert::success('Delete Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Delete Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
-    public function kurkulum_kedokteran(){
+    public function kurkulum_kedokteran()
+    {
         $data['title'] = 'Data Kurikulum Kedokteran';
         $data['kurikulum'] = Kurikulum::with('tahun_akademik')->get();
-        $data['tahun_akademik'] = TahunAkademik::where('semester',1)->get();
+        $data['tahun_akademik'] = TahunAkademik::where('semester', 1)->get();
         return view('admin/jurusan/kurikulum/data_kurikulum', $data);
     }
-    public function kurkulum_kedokteran_store(Request $request){
+    public function kurkulum_kedokteran_store(Request $request)
+    {
         $obj = array(
             'nama_kurikulum' => $request->nama_kurikulum,
             'id_tahun_akademik' => $request->tahun_akademik,
@@ -65,31 +76,33 @@ class KurikulumController extends Controller
         try {
             Kurikulum::create($obj);
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Tambah Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
-    public function kurkulum_kedokteran_update(Request $request){
+    public function kurkulum_kedokteran_update(Request $request)
+    {
         $obj = array(
             'nama_kurikulum' => $request->nama_kurikulum,
             'id_tahun_akademik' => $request->tahun_akademik,
         );
         try {
-            Kurikulum::where('id',$request->id)->update($obj);
+            Kurikulum::where('id', $request->id)->update($obj);
             Alert::success('Update Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Update Data Error', 'Server Error!')->autoClose(2000);
         }
         return redirect()->back();
     }
-    public function kurkulum_kedokteran_delete($id){
+    public function kurkulum_kedokteran_delete($id)
+    {
         try {
-            Kurikulum::where('id',$id)->delete();
+            Kurikulum::where('id', $id)->delete();
             Alert::success('Delete Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
-        
+
         } catch (\Throwable $th) {
             Alert::error('Delete Data Error', 'Server Error!')->autoClose(2000);
         }

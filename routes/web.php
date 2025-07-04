@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\Jurusan\DosenController;
 use App\Http\Controllers\Admin\Jurusan\FakultasControlelr;
 use App\Http\Controllers\Admin\Jurusan\FakultasController;
 use App\Http\Controllers\Admin\Jurusan\KurikulumController;
 use App\Http\Controllers\Admin\Jurusan\MatakuliahController;
 use App\Http\Controllers\Admin\Jurusan\Program_studiController;
+use App\Models\Dosen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MahasiswaController;
@@ -59,7 +61,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/kurikulum/matakuliah', [MatakuliahController::class, 'update'])->name('admin.matakuliah');
     Route::delete('/kurikulum/matakuliah/{id}', [MatakuliahController::class, 'delete'])->name('admin.matakuliah.delete');
     //dosen
-    Route::get('/dosen', [KurikulumController::class, 'index'])->name('admin.dosen');
+    Route::get('/dosen', [DosenController::class, 'index'])->name('admin.dosen');
 });
 
 Route::get('/dashboard', function () {
@@ -68,4 +70,4 @@ Route::get('/dashboard', function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

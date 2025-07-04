@@ -1,6 +1,38 @@
 @extends('admin.layout')
 
 @section('link')
+    <style>
+        .select2-custom-group {
+            display: flex;
+            width: 100%;
+        }
+
+        .select2-container {
+            flex: 1;
+        }
+
+        .select2-selection--single {
+            height: 38px;
+            border: 1px solid #ced4da;
+            border-radius: 4px 0 0 4px;
+            padding: 5px 10px;
+        }
+
+        .btn-search {
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            color: white;
+            margin-top: 1px;
+            padding: 0 15px;
+            height: 38px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .btn-search:hover {
+            background-color: #0056b3;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -9,11 +41,20 @@
         <div class="card card-stats card-round w-100">
             <div class="card-header row">
                 <div class="col-md-4 col-8">
-                    <select name="" id="" class="form-control select2" style="width:100%;">
-                        @foreach ($kurikulum as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama_kurikulum }}</option>
-                        @endforeach
-                    </select>
+                    <form action="" method="get">
+                        <div class="input-group">
+                            <select name="kurikulum" id="" class="form-control select3">
+                                @foreach ($kurikulum as $item)
+                                    <option value="{{ $item->id }}" @if ($id_kurikulum->id == $item->id )
+                                        selected
+                                    @endif>{{ $item->nama_kurikulum }}</option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn-search icon-magnifier" id="search-btn"></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-md-8 col-4">
                     <a href="{{ route('admin.kurikulum.kedokteran') }}"
@@ -29,7 +70,7 @@
                             Semester {{ $item['semester'] }}
                             @if ($id_kurikulum)
                                 <button class="btn btn-sm btn-primary float-end " data-bs-toggle="modal" data-bs-target="#create"
-                                    onclick="create({{$id_kurikulum->id_tahun_akademik}},{{ $item['semester'] }})">Tambah</button>
+                                    onclick="create({{$id_kurikulum->id}},{{ $item['semester'] }})">Tambah</button>
                             @endif
 
                             <h2>
@@ -123,6 +164,11 @@
             $(this).select2({
                 width: '100%',
                 dropdownParent: $(this).closest('.modal'),
+            });
+        });
+         $('.select3').each(function () {
+            $(this).select2({
+                width: '100%',
             });
         });
 
