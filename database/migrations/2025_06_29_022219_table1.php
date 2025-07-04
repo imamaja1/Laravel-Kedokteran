@@ -73,6 +73,7 @@ return new class extends Migration {
             $table->string('homebase');
             $table->string('sandi_pengguna');
             $table->string('status');
+            $table->string('email');
             $table->string('signature');
             $table->string('chatid');
             $table->string('foto');

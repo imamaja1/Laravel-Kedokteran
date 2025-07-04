@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('data_kurikulum', function (Blueprint $table) {
             $table->id();
             $table->string('id_kurikulum');
-            $table->string('matakuliah');
+            $table->string('id_matakuliah');
             $table->string('semester');
             $table->timestamps();
         });

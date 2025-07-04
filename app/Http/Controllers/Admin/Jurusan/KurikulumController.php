@@ -17,15 +17,18 @@ class KurikulumController extends Controller
         $data['title'] = 'Data Kurikulum';
         if ($request->query('kurikulum')) {
             $data['id_kurikulum'] = Kurikulum::where('id', $request->query('kurikulum'))->get()->first();
+            $tmp = $data['id_kurikulum']->id;
         } else {
             $data['id_kurikulum'] = Kurikulum::get()->first();
+            $tmp = $data['id_kurikulum']->id;
+            if (!$tmp) {
+                $tmp = 0;
+            }
         }
-        // echo json_encode($data['id_kurikulum']);
-        // die();
         for ($i = 1; $i <= 8; $i++) {
             $obj[] = array(
                 'semester' => $i,
-                'data' => DataKurikulum::with('data_matakuliah')->where('id_kurikulum', $data['id_kurikulum']->id)->where('semester', $i)->get()
+                'data' => DataKurikulum::with('data_matakuliah')->where('id_kurikulum', $tmp)->where('semester', $i)->get()
             );
         }
         $data['kurikulum'] = Kurikulum::all();
