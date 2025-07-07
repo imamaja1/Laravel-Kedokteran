@@ -31,12 +31,14 @@
                                 <td>{{ $item->status_dosen }}</td>
                                 <td>{{ $item->status }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary" onclick="update({{ $item }})"
-                                        data-bs-toggle="modal" data-bs-target="#update">Update</button>
-                                    <form id="delete-form-{{$item->id}}" action="{{route('admin.program_studi.delete',$item->id)}}" method="post">
+                                    <button class="btn btn-sm btn-primary" onclick="update({{ $item }})" data-bs-toggle="modal"
+                                        data-bs-target="#update">Update</button>
+                                    <form id="delete-form-{{$item->id}}"
+                                        action="{{route('admin.program_studi.delete', $item->id)}}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete({{$item->id}})">Delete </button>
+                                        <button type="button" class="btn btn-sm btn-danger"
+                                            onclick="confirmDelete({{$item->id}})">Delete </button>
                                     </form>
                                 </td>
                             </tr>
@@ -46,10 +48,11 @@
             </div>
         </div>
     </div>
+    @include('admin/jurusan/dosen/create')
 @endsection
 @section('src')
     <script>
-        $('.select1').each(function() {
+        $('.select1').each(function () {
             $(this).select2({
                 width: '100%',
                 dropdownParent: $(this).closest('.modal'),

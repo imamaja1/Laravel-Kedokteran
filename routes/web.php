@@ -62,6 +62,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/kurikulum/matakuliah/{id}', [MatakuliahController::class, 'delete'])->name('admin.matakuliah.delete');
     //dosen
     Route::get('/dosen', [DosenController::class, 'index'])->name('admin.dosen');
+    Route::post('/dosen', [DosenController::class, 'index'])->name('admin.dosen');
 });
 
 Route::get('/dashboard', function () {
