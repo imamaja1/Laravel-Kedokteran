@@ -17,8 +17,10 @@
                             <th>No</th>
                             <th>NIK / NIP</th>
                             <th>Nama Dosen</th>
-                            <th>Email</th>
+                            <th>Pengajar</th>
                             <th>Status</th>
+                            <th class="text-center">Sigantur </th>
+                            <th class="text-center">Foto</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,13 +32,34 @@
                                 <td>{{ $item->nama_dosen }}</td>
                                 <td>{{ $item->status_dosen }}</td>
                                 <td>{{ $item->status }}</td>
+                                <td class="text-center">
+                                    @if($item->sigantur)
+                                        <div class=" btn-sm btn-icon btn-round btn-success">
+											<i class="fa fa-check pt-1"></i>
+										</div>
+                                    @else
+                                        <div class="btn-sm btn-icon btn-round btn-info">
+											<i class="fa fa-info"></i>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($item->foto)
+                                        <div  class=" btn-sm btn-icon btn-round btn-success">
+											<i class="fa fa-check pt-1"></i>
+										</div>
+                                    @else
+                                        <div class="btn-sm btn-icon btn-round btn-info">
+											<i class="fa fa-info"></i>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary" onclick="update({{ $item }})" data-bs-toggle="modal"
-                                        data-bs-target="#update">Update</button>
                                     <form id="delete-form-{{$item->id}}"
                                         action="{{route('admin.program_studi.delete', $item->id)}}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <a href="{{ route('admin.dosen.update',$item->id) }}" class="btn btn-sm btn-primary" >Update</a>
                                         <button type="button" class="btn btn-sm btn-danger"
                                             onclick="confirmDelete({{$item->id}})">Delete </button>
                                     </form>

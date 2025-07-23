@@ -9,6 +9,9 @@
                     @if (request()->segment($i))
                         @php
                             $string = request()->segment($i);
+                            if (preg_match('/\d/', $string)) {
+                                continue;
+                            }
                             $string = str_replace('_', ' ', $string);
                             $string = ucwords($string);
                         @endphp
