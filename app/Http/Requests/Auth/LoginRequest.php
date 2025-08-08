@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Mahasiswa;
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -39,17 +42,29 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $this->ensureIsNotRateLimited();
+        $auth_mhs = User::where('nim',$this->only('nim'))->get();
+        if ($auth_mhs) {
+            if (! Auth::attempt($this->only( 'password'), $this->boolean('remember'))) {
+                RateLimiter::hit($this->throttleKey());
 
-        if (! Auth::attempt($this->only('nim', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'nim' => trans('auth.failed'),
-            ]);
+                throw ValidationException::withMessages([
+                    'nim' => trans('auth.failed'),
+                ]);
+            }
         }
-
         RateLimiter::clear($this->throttleKey());
+        //dosen
+        // $this->ensureIsNotRateLimited();
+
+        // if (! Auth::attempt($this->only('nim', 'password'), $this->boolean('remember'))) {
+        //     RateLimiter::hit($this->throttleKey());
+
+        //     throw ValidationException::withMessages([
+        //         'nim' => trans('auth.failed'),
+        //     ]);
+        // }
+
+        // RateLimiter::clear($this->throttleKey());
     }
 
     /**

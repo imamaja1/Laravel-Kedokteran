@@ -34,7 +34,7 @@ class DosenController extends Controller
             Alert::success('Tambah Data Berhasil', 'Data Telah Diperbaharui!')->autoClose(2000);
 
         } catch (\Throwable $th) {
-            Alert::error('Tambah Data Gagal', 'Server Error!')->autoClose(6000);
+            Alert::error(json_encode($th), 'Server Error!')->autoClose(6000);
         }
         return redirect()->back();
     }
@@ -42,7 +42,7 @@ class DosenController extends Controller
     {
         $data['title'] = "Update Dosen";
         $data['active'] = $aktif;
-        $data['data'] = Dosen::where('id', $id)->get();
+        $data['data'] = Dosen::where('id', $id)->get()->first();
         return view('admin.jurusan.dosen.update', $data);
     }
     public function update(Request $request, $id)
